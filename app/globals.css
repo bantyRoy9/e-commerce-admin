@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+html,
+body{
+    margin:0;
+    padding:0;
+    background:#F5F7FA;
+    color:#111827;
+    font-family:Inter,Arial,Helvetica,sans-serif;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+::-webkit-scrollbar{
+    width:8px;
+    height:8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#D1D5DB;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#9CA3AF;
+}
+
+.card{
+    @apply bg-white rounded-3xl shadow-sm;
+}
+
+.card-hover{
+    @apply transition-all duration-300 hover:shadow-lg;
+}
+
+.page-title{
+    @apply text-4xl font-bold text-slate-900;
+}
+
+.page-subtitle{
+    @apply text-slate-500 mt-1;
+}
+
+.primary-btn{
+    @apply bg-green-600 hover:bg-green-700 text-white rounded-2xl px-6 py-3 font-semibold transition-all;
+}
+
+.secondary-btn{
+    @apply rounded-2xl border border-slate-200 px-6 py-3 bg-white hover:bg-slate-50 transition;
+}
+
+.search-input{
+    @apply w-80 h-12 rounded-2xl bg-white border border-slate-200 px-5 outline-none focus:border-green-600;
+}
+
+.status-green{
+    @apply bg-green-100 text-green-700 rounded-full px-3 py-1 text-xs font-semibold;
+}
+
+.status-red{
+    @apply bg-red-100 text-red-700 rounded-full px-3 py-1 text-xs font-semibold;
+}
+
+.status-yellow{
+    @apply bg-yellow-100 text-yellow-700 rounded-full px-3 py-1 text-xs font-semibold;
+}

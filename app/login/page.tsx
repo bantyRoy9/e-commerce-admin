@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
@@ -18,10 +18,11 @@ export default function LoginPage() {
   const [submitting, setSubmitting] = useState(false);
 
   // Already logged in → go to dashboard
-  if (!loading && user) {
-    router.replace("/dashboard");
-    return null;
-  }
+  useEffect(() => {
+    if (!loading && user) {
+      router.replace("/dashboard");
+    }
+  }, [loading, user, router]);
 
   async function handleLogin(e?: FormEvent) {
     e?.preventDefault();
@@ -29,7 +30,7 @@ export default function LoginPage() {
     setSubmitting(true);
     try {
       await login(email, password, orgSlug);
-      router.replace("/dashboard");
+      // Redirect is now handled by useEffect when user state updates
     } catch (err: any) {
       const msg = err?.response?.data?.message;
       if (msg === "Invalid credentials")          setError("Invalid email or password.");
@@ -39,6 +40,23 @@ export default function LoginPage() {
     } finally {
       setSubmitting(false);
     }
+  }
+
+  // Show loading state while checking authentication
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center bg-slate-100">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-4 border-green-600 border-t-transparent rounded-full animate-spin" />
+          <span className="text-slate-500 text-sm">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
+  // Don't render form if user is already logged in (redirect in progress)
+  if (user) {
+    return null;
   }
 
   return (

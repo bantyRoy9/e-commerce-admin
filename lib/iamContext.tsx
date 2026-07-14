@@ -91,6 +91,7 @@ export function IAMProvider({ children }: { children: ReactNode }) {
     );
     if (res.data.sessionProof) setProof(res.data.sessionProof);
     await loadUser();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const logout = useCallback(async () => {

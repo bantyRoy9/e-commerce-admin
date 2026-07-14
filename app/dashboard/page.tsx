@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { IAMGuard } from "@/lib/iamGuard";
 
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import DashboardCard from "@/components/dashboard/DashboardCard";
@@ -219,7 +220,9 @@ console.log("dashboard", dashboard);
 }
 
 export default function Dashboard() {
-
-  return <DashboardContent />;
-
+  return (
+    <IAMGuard>
+      <DashboardContent />
+    </IAMGuard>
+  );
 }
